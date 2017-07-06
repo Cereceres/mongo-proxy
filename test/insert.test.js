@@ -37,8 +37,7 @@ describe('description', () => {
             .expect(200);
         const res = yield this.collection.find(this.query);
         console.log('res ===', res, response.body);
-        assert(res.test === 'test 2');
-        assert(res.user === data.user);
-        assert(res.length === 1);
+        assert(res.get('test') === 'test 2');
+        assert(res.get('user') === data.user);
     });
 });
