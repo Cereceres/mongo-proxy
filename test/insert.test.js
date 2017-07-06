@@ -29,14 +29,14 @@ describe('description', () => {
 
 
     it('should', function *() {
-        yield this.agent
+        cons reponse = yield this.agent
             .put('/user')
             .send({ test:'test 2' })
             .query(this.query)
             .expect('Content-Type', 'application/json')
             .expect(200);
         const res = yield this.collection.find(this.query);
-        console.log('res ===', res);
+        console.log('res ===', res, response);
         assert(res.test === 'test 2');
         assert(res.user === data.user);
         assert(res.length === 1);
