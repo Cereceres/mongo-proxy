@@ -22,8 +22,9 @@ describe('description', () => {
             .query(this.query)
             .expect('Content-Type', 'application/json')
             .expect(200);
-        assert(res.body.test === data.test);
-        assert(res.body.user === data.user);
+        assert(res.body[0].test === data.test);
+        assert(res.body[0].user === data.user);
+        assert(res.body.length === 1);
     });
 
 
