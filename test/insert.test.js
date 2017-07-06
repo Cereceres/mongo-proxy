@@ -29,7 +29,7 @@ describe('description', () => {
 
 
     it('should', function *() {
-        cons reponse = yield this.agent
+        const reponse = yield this.agent
             .put('/user')
             .send({ test:'test 2' })
             .query(this.query)
