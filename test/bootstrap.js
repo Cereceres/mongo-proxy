@@ -22,8 +22,9 @@ before(function() {
     this.agent = agent(server);
     this.models = models;
     this.query = { user: 1 };
+    this.collection = collection;
 });
 
 after(function() {
-    return collection.delete(this.query);
+    return this.collection.delete(this.query);
 });
