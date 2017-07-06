@@ -28,14 +28,15 @@ describe('description', () => {
     });
 
 
-    // it('should', function(done) {
-    //     this.agent
-    //         .put('/user')
-    //         .expect('Content-Type', 'application/json')
-    //         .expect(200, (err, res) => {
-    //             console.log(res.body);
-    //             assert(res);
-    //             done();
-    //         });
-    // });
+    it('should', function() {
+        const res = yield this.agent
+            .put('/user')
+            .send({ test:'test 2' })
+            .query(this.query)
+            .expect('Content-Type', 'application/json')
+            .expect(200)
+        assert(res.body[0].test === 'test 2');
+        assert(res.body[0].user === data.user);
+        assert(res.body.length === 1);
+    });
 });
