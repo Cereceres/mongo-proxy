@@ -7,7 +7,7 @@ const getCallback = require('./lib/get-callback');
 const validateParams = require('./lib/validate-params.js');
 const getDatabase = require('./lib/database');
 
-const databaseUrlDefault = 'mongodb://localhost:27017/test';
+const databaseUrlDefault = 'mongodb://127.0.0.1:27017/test';
 const portDefault = '8080';
 const defaultDatabase = getDatabase(databaseUrlDefault);
 

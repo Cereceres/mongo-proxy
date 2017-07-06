@@ -11,7 +11,7 @@ const models = {
 };
 
 
-const databaseUrlDefault = 'mongodb://localhost:27017/test';
+const databaseUrlDefault = 'mongodb://127.0.0.1:27017/test';
 const database = getDatabase(databaseUrlDefault);
 const collection = getCollection(database)('user', models);
 
