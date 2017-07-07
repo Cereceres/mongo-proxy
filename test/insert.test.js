@@ -40,4 +40,15 @@ describe('description', () => {
         assert(res[0].get('test') === 'test 2');
         assert(res[0].get('user') === data.user);
     });
+
+    it('should', function *() {
+        const response = yield this.agent
+            .delete('/user')
+            .query(this.query)
+            .expect('Content-Type', 'application/json')
+            .expect(200);
+        const res = yield this.collection.find(this.query);
+        console.log('res ===', res, response.body);
+        assert(!res.length);
+    });
 });
