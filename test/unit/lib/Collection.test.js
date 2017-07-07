@@ -58,7 +58,7 @@ describe('Collection test', () => {
             },
         };
         const collection = new Collection(database);
-        const resData = yield collection.find(data);
+        const resData = yield collection.create(data);
         assert.deepEqual(resData, { res:'res' });
     });
 });
