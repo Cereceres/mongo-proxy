@@ -7,13 +7,19 @@ describe('fail test', () => {
         assert(typeof fail === 'function');
     });
 
+    it('should return a function', () => {
+        const functionReturned = fail();
+        assert(typeof functionReturned === 'function');
+    });
+
     it('should call the write of res object', () => {
         const status = 700;
         const error = new Error('this error happen');
         const resObj = { write: (response) => {
-            console.log('response : ', response);
-
-            assert(JSON.parse(response));
+            const _res = JSON.parse(response);
+            assert.deepEqual(_res.headers, { 'Content-Type':'application/json' });
+            assert.deepEqual(_res.body, { error:'this error happen' });
+            assert.equal(_res.status, status);
         } };
         fail(resObj, status, error)();
     });
