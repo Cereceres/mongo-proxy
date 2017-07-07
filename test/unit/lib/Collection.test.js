@@ -20,4 +20,45 @@ describe('Collection test', () => {
         const resQuery = yield collection.find(query);
         assert.deepEqual(resQuery, { res:'res' });
     });
+
+    it('should have a update method', function *() {
+        const query = { test:'test' };
+        const data = { user:'user' };
+        const database = {
+            update: (_query, _data) => ({ exec:() => {
+                assert.deepEqual(query, _query);
+                assert.deepEqual(data, _data);
+                return Promise.resolve({ res:'res' });
+            } }),
+        };
+        const collection = new Collection(database);
+        const resQuery = yield collection.update(query, data);
+        assert.deepEqual(resQuery, { res:'res' });
+    });
+
+    it('should have a delete method', function *() {
+        const query = { test:'test' };
+        const database = {
+            deleteMany: (_query) => ({ exec:() => {
+                assert.deepEqual(query, _query);
+                return Promise.resolve({ res:'res' });
+            } }),
+        };
+        const collection = new Collection(database);
+        const resQuery = yield collection.delete(query);
+        assert.deepEqual(resQuery, { res:'res' });
+    });
+
+    it('should have a create method', function *() {
+        const data = { test:'test' };
+        const database = {
+            create: (_data) => {
+                assert.deepEqual(data, _data);
+                return Promise.resolve({ res:'res' });
+            },
+        };
+        const collection = new Collection(database);
+        const resData = yield collection.find(data);
+        assert.deepEqual(resData, { res:'res' });
+    });
 });
