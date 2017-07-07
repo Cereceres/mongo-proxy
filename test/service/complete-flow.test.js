@@ -6,7 +6,7 @@ const data = {
 };
 
 describe('description', () => {
-    it('should', function *() {
+    it('should create a document', function *() {
         const res = yield this.agent
             .post('/user')
             .send(data)
@@ -16,7 +16,7 @@ describe('description', () => {
         assert(res.body.user === data.user);
     });
 
-    it('should', function *() {
+    it('should get the doc created', function *() {
         const res = yield this.agent
             .get('/user')
             .query(this.query)
@@ -28,7 +28,7 @@ describe('description', () => {
     });
 
 
-    it('should', function *() {
+    it('should update the doc created', function *() {
         const response = yield this.agent
             .put('/user')
             .send({ test:'test 2' })
@@ -41,7 +41,7 @@ describe('description', () => {
         assert(res[0].get('user') === data.user);
     });
 
-    it('should', function *() {
+    it('should delete the doc created', function *() {
         const response = yield this.agent
             .delete('/user')
             .query(this.query)
