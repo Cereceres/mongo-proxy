@@ -1,5 +1,7 @@
 const assert = require('assert');
 
+const proxyquire = require('proxyquire');
+
 const getterCb = require('../../../lib/get-cb-create-server');
 
 describe('getterCb test', () => {
