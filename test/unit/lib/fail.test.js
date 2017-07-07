@@ -19,7 +19,7 @@ describe('fail test', () => {
             const _res = JSON.parse(response);
             assert.deepEqual(_res.headers, { 'Content-Type':'application/json' });
             assert.deepEqual(_res.body, { error:'this error happen' });
-            assert.equal(_res.status, status);
+            assert.equal(_res.statusCode, status);
         } };
         fail(resObj, status, error)();
     });

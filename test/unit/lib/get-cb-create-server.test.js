@@ -8,8 +8,7 @@ describe('getterCb test', () => {
     });
 
     it('should return a function', () => {
-        assert(typeof getterCb() === 'function');
+        const getCb = getterCb();
+        assert(typeof getCb === 'function');
     });
 });
-
-
