@@ -17,7 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha test/bootstrap test/**/*.test.js"
+    "test": "mocha test/bootstrap test/**/**/*.test.js"
   },
   "repository": {
     "type": "git",
