@@ -13,9 +13,10 @@ const models = {
 
 const databaseUrlDefault = 'mongodb://127.0.0.1:27017/test';
 const database = getDatabase(databaseUrlDefault);
-const collection = getCollection(database)('user', models);
+database.models('user', new database.Schema(models.user));
+const collection = getCollection(database, 'user')();
 
-const server = require('../index')(database, undefined, models);
+const server = require('../index')(database);
 
 
 before(function() {
