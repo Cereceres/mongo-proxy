@@ -8,9 +8,10 @@ const databaseUrlDefault = 'mongodb://127.0.0.1:27017/test';
 const portDefault = process.env.PORT || '8080';
 const dbDefault = getDatabase(databaseUrlDefault);
 
-module.exports = (db = dbDefault, port = portDefault) => {
-    const getCollection = getterOfCollection(db);
-    const server = http.createServer(getCb(getCollection, db));
+module.exports = (database = dbDefault, port = portDefault) => {
+    const getCollection = getterOfCollection(database);
+    const cb = getCb(getCollection, database);
+    const server = http.createServer(cb);
     server.listen(port);
     return server;
 };
