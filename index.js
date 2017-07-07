@@ -10,7 +10,7 @@ const dbDefault = getDatabase(databaseUrlDefault);
 
 module.exports = (db = dbDefault, port = portDefault) => {
     const getCollection = getterOfCollection(db);
-    const server = http.createServer(getCb(getCollection, db.models));
+    const server = http.createServer(getCb(getCollection, db));
     server.listen(port);
     return server;
 };
