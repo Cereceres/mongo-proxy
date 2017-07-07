@@ -8,10 +8,13 @@ describe('fail test', () => {
     });
 
     it('should call the write of res object', () => {
-        const resObj = { write: () => {
+        const status = 700;
+        const error = new Error('this error happen');
+        const resObj = { write: (response) => {
+            console.log('response : ', response);
 
+            assert(JSON.parse(response));
         } };
-
-        
+        fail(resObj, status, error)();
     });
 });
