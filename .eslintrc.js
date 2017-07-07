@@ -76,6 +76,7 @@ module.exports = exports = {
         "no-self-compare": ERROR,
         "no-throw-literal": ERROR,
         "no-unused-expressions": ERROR,
+        "no-unused-vars": ERROR,
         "no-useless-call": ERROR,
         "no-useless-concat": ERROR,
         "no-void": WARN,
