@@ -5,6 +5,7 @@ node_js:
 install:
   - npm install
   - npm install mocha -g
+  - npm install nyc -g
 script:
   - npm test
 services:
