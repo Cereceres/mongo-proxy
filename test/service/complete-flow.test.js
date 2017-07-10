@@ -24,7 +24,7 @@ describe('description', () => {
             .expect(200);
         assert(res.body.$data[0].test === data.test);
         assert(res.body.$data[0].user === data.user);
-        assert(res.body.length === 1);
+        assert(res.body.$data.length === 1);
     });
 
 
