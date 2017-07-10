@@ -1,6 +1,10 @@
 var OFF = 0, WARN = 1, ERROR = 2;
 
 module.exports = exports = {
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
     "env": {
         "es6": true,
         "mocha": true,
