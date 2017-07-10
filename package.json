@@ -9,13 +9,14 @@
   },
   "dependencies": {
     "co-mocha": "^1.2.0",
-    "mongoose": "^4.11.0",
     "qs": "^6.5.0",
     "supertest": "^3.0.0",
     "url-parse": "^1.1.9",
     "proxyquire": "^1.8.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mongoose": "^4.11.1"
+  },
   "scripts": {
     "test": "nyc mocha test/bootstrap $(find test/ -name '*.test.js')"
   },

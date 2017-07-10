@@ -1,12 +1,24 @@
 const agent = require('supertest');
-
+const mongoose = require('mongoose');
 const getCollection = require('../lib/get-collection');
 const getDatabase = require('../lib/database');
 
 const models = {
     user:{
         user: Number,
-        test: String
+        test: String,
+        otherUser: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'otherUser'
+        }
+    },
+    otherUser:{
+        otherUser: Number,
+        something: String,
+        friends: [ {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'user'
+        } ]
     }
 };
 
