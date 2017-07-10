@@ -17,7 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "nyc mocha test/bootstrap $(find test/ -name '*.test.js')"
+    "test": "mocha test/bootstrap $(find test/ -name '*.test.js')"
   },
   "repository": {
     "type": "git",
