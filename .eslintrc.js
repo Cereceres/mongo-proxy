@@ -1,6 +1,10 @@
 var OFF = 0, WARN = 1, ERROR = 2;
 
 module.exports = exports = {
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
     "env": {
         "es6": true,
         "mocha": true,
@@ -29,6 +33,7 @@ module.exports = exports = {
         }],
         "no-undef": ERROR,
         "block-scoped-var": WARN,
+        "prefer-const":ERROR,
         "consistent-return": OFF,
         "curly": OFF,
         "default-case": WARN,
@@ -76,6 +81,7 @@ module.exports = exports = {
         "no-self-compare": ERROR,
         "no-throw-literal": ERROR,
         "no-unused-expressions": ERROR,
+        "no-unused-vars": ERROR,
         "no-useless-call": ERROR,
         "no-useless-concat": ERROR,
         "no-void": WARN,

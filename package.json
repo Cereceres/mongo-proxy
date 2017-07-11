@@ -1,0 +1,38 @@
+{
+  "name": "mongo-proxy",
+  "version": "1.0.0",
+  "description": "mongo proxy server",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "co-mocha": "^1.2.0",
+    "qs": "^6.5.0",
+    "supertest": "^3.0.0",
+    "url-parse": "^1.1.9",
+    "proxyquire": "^1.8.0"
+  },
+  "devDependencies": {
+    "mongoose": "^4.11.1"
+  },
+  "scripts": {
+    "test": "nyc mocha test/bootstrap $(find test/ -name '*.test.js')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cereceres/mongo-proxy.git"
+  },
+  "keywords": [
+    "mongo",
+    "proxy",
+    "server"
+  ],
+  "author": "Jesus Cereceres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cereceres/mongo-proxy/issues"
+  },
+  "homepage": "https://github.com/Cereceres/mongo-proxy#readme"
+}
