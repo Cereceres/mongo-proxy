@@ -5,7 +5,7 @@ const data = {
     user:1
 };
 
-describe('description', () => {
+describe('All complete service', () => {
     it('should create a document', function *() {
         const res = yield this.agent
             .post('/user')
@@ -50,5 +50,9 @@ describe('description', () => {
         const res = yield this.collection.find(this.query);
         console.log('res ===', res, response.body);
         assert(!res.length);
+    });
+
+    after(function() {
+        return this.collection.delete({});
     });
 });

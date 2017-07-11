@@ -1,29 +1,54 @@
 const assert = require('assert');
 
-const data = {
-    test:'testing',
-    user:1
-};
-
-describe('description', () => {
-    it('should create a document', function *() {
-        const res = yield this.agent
+describe('Populate service', () => {
+    before(function *() {
+        const user1 = yield this.agent
             .post('/user')
-            .send(data)
-            .expect('Content-Type', 'application/json')
-            .expect(200);
-        assert(res.body.$data.test === data.test);
-        assert(res.body.$data.user === data.user);
+            .send({
+                user: 1,
+                test: 'test 1'
+            });
+
+        const user2 = yield this.agent
+            .post('/user')
+            .send({
+                user: 2,
+                test: 'test 2'
+            });
+
+        const otherUser = yield this.agent
+            .post('/otherUser')
+            .send({
+                user: 2,
+                test: 'test 2',
+                friends:[ user1.$data._id, user2.$data._id ]
+            });
+
+        yield this.agent
+            .put('/user')
+            .query({
+                user: 1
+            })
+            .send({ otherUser: otherUser._id });
+
+        yield this.agent
+            .put('/user')
+            .query({
+                user: 2
+            })
+            .send({ otherUser: otherUser._id });
+
+
+        console.log('data ===', user1, user2, otherUser);
     });
 
-    it('should get the doc created', function *() {
+    it('should get the doc populated', function *() {
         const res = yield this.agent
             .get('/user')
             .query(this.query)
             .expect('Content-Type', 'application/json')
             .expect(200);
-        assert(res.body.$data[0].test === data.test);
-        assert(res.body.$data[0].user === data.user);
-        assert(res.body.$data.length === 1);
+        console.log('res ===', res.body);
+        assert(res.body.$data);
     });
 });

@@ -26,7 +26,10 @@ const models = {
 const databaseUrlDefault = 'mongodb://127.0.0.1:27017/test';
 const database = getDatabase(databaseUrlDefault);
 database.model('user', new database.Schema(models.user));
+database.model('otherUser', new database.Schema(models.otherUser));
+
 const collection = getCollection(database, 'user')();
+const otherCollection = getCollection(database, 'otherUser')();
 
 const server = require('../index')(database);
 
@@ -36,8 +39,9 @@ before(function() {
     this.models = models;
     this.query = { user: 1 };
     this.collection = collection;
+    this.otherCollection = otherCollection;
 });
 
 after(function() {
-    return this.collection.delete(this.query);
+    return this.collection.delete({});
 });
