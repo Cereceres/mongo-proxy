@@ -33,6 +33,7 @@ module.exports = exports = {
         }],
         "no-undef": ERROR,
         "block-scoped-var": WARN,
+        "prefer-const":ERROR,
         "consistent-return": OFF,
         "curly": OFF,
         "default-case": WARN,
