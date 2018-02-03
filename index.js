@@ -27,13 +27,15 @@ const _getMiddleware = exports.getMiddleware = (dbUrl = dbHost, getters = {}) =>
     return getCallback(getCollection, getSchema, getUser);
 };
 
-const getServer = exports.getServer = (dbUrl, getMiddleware, getters) => {
+const _getServer = exports.getServer = (dbUrl, getters = {}) => {
+    const { getMiddleware = _getMiddleware } = getters;
     const serverCallback = getMiddleware(dbUrl, getters);
     return http.createServer(serverCallback);
 };
 
-exports.startServer = (dbUrl, port = portDefault, getMiddleware = _getMiddleware, getters) => {
-    const server = getServer(dbUrl, getMiddleware, getters);
+exports.startServer = (dbUrl, port = portDefault, getters = {}) => {
+    const { getServer = _getServer } = getters;
+    const server = getServer(dbUrl, getters);
     server.listen(port);
     return server;
 };
