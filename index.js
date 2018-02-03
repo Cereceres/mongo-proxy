@@ -2,26 +2,39 @@ const http = require('http');
 
 const getGetterCollection = require('./lib/get-getter-collection');
 const getCallback = require('./lib/get-callback');
-const getDatabase = require('./lib/database');
 const getGetterSchema = require('./lib/get-getter-schema');
-const getModelSchema = require('./lib/get-getter-schema/get-model-schema');
-const getUserModel = require('./lib/get-getter-user/get-model-user');
+const _getDatabase = require('./lib/database');
+const _getSchemaModel = require('./lib/get-getter-schema/get-model-schema');
+const _getUserModel = require('./lib/get-getter-user/get-model-user');
 const getGetterUser = require('./lib/get-getter-user');
 
-const mongoHostDefault = 'mongodb://localhost:27017/test';
-const portDefault = '8080';
+const dbHost = 'mongodb://localhost:27017/test';
+const portDefault = process.env.PORT || '8080';
 
-module.exports = (databaseUrl = mongoHostDefault, port = portDefault) => {
-    const PORT = port || process.env.PORT;
-    const database = getDatabase(databaseUrl);
-    const ModelSchema = getModelSchema(database);
-    const ModelUser = getUserModel(database);
+const _getMiddleware = exports.getMiddleware = (dbUrl = dbHost, getters = {}) => {
+    const {
+        getDatabase = _getDatabase,
+        getUserModel = _getUserModel,
+        getSchemaModel = _getSchemaModel,
+        getCollection:_getCollection
+    } = getters;
+    const db = getDatabase(dbUrl);
+    const ModelSchema = getSchemaModel(db);
+    const ModelUser = getUserModel(db);
     const getUser = getGetterUser(ModelUser);
     const getSchema = getGetterSchema(ModelSchema);
-    const getCollection = getGetterCollection(database);
-    const serverCallback = getCallback(getCollection, getSchema, getUser);
-    const server = http.createServer(serverCallback);
-    server.listen(PORT);
+    const getCollection = _getCollection || getGetterCollection(db);
+    return getCallback(getCollection, getSchema, getUser);
+};
+
+const getServer = exports.getServer = (dbUrl, getMiddleware, getters) => {
+    const serverCallback = getMiddleware(dbUrl, getters);
+    return http.createServer(serverCallback);
+};
+
+exports.startServer = (dbUrl, port = portDefault, getMiddleware = _getMiddleware, getters) => {
+    const server = getServer(dbUrl, getMiddleware, getters);
+    server.listen(port);
     return server;
 };
 

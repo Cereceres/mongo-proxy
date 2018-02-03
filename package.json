@@ -27,11 +27,11 @@
   "homepage": "https://github.com/Cereceres/mongo-proxy#readme",
   "dependencies": {
     "basic-auth": "^2.0.0",
-    "enjoi": "^3.2.2",
-    "mongoose": "^5.0.3"
+    "joison": "0.0.3",
+    "mongoose": "^5.0.3",
+    "joi": "^13.1.2"
   },
   "devDependencies": {
-    "joi": "^13.1.2",
     "supertest": "^3.0.0"
   }
 }

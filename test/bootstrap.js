@@ -7,10 +7,10 @@ const getUserModel = require('../lib/get-getter-user/get-model-user');
 const Schema = getSchemaModel(db);
 const User = getUserModel(db);
 
-const server = require('../index')();
+const { startServer } = require('../index');
 
 before(function() {
-    this.agent = agent(server);
+    this.agent = agent(startServer());
     this.Schema = Schema;
     this.User = User;
 });
