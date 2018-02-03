@@ -1,0 +1,37 @@
+{
+  "name": "mongo-proxy",
+  "version": "0.0.1",
+  "description": "server to be used as proxy to mongodb",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cereceres/mongo-proxy.git"
+  },
+  "keywords": [
+    "mongodb",
+    "proxy",
+    "server"
+  ],
+  "author": "Jesus Cereceres",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cereceres/mongo-proxy/issues"
+  },
+  "homepage": "https://github.com/Cereceres/mongo-proxy#readme",
+  "dependencies": {
+    "basic-auth": "^2.0.0",
+    "enjoi": "^3.2.2",
+    "mongoose": "^5.0.3"
+  },
+  "devDependencies": {
+    "joi": "^13.1.2",
+    "supertest": "^3.0.0"
+  }
+}
