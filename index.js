@@ -11,7 +11,7 @@ const getGetterUser = require('./lib/get-getter-user');
 const dbHost = 'mongodb://localhost:27017/test';
 const portDefault = process.env.PORT || '8080';
 
-const _getMiddleware = exports.getMiddleware = (dbUrl = dbHost, getters = {}) => {
+const _getMiddleware = exports.getMiddleware = (dbUrl, getters = {}) => {
     const {
         getDatabase = _getDatabase,
         getUserModel = _getUserModel,
