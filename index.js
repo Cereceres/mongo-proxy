@@ -12,12 +12,14 @@ const dbHost = 'mongodb://localhost:27017/test';
 const portDefault = process.env.PORT || '8080';
 
 const _getMiddleware = exports.getMiddleware = (dbUrl, getters = {}) => {
+    console.log('getters = ', getters);
     const {
         getDatabase = _getDatabase,
         getUserModel = _getUserModel,
         getSchemaModel = _getSchemaModel,
         getCollection:_getCollection
     } = getters;
+    console.log('getDatabase ', getDatabase);
     const db = getDatabase(dbUrl);
     const ModelSchema = getSchemaModel(db);
     const ModelUser = getUserModel(db);

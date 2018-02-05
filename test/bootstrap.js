@@ -17,4 +17,5 @@ before(function() {
 
 after(async function() {
     await this.Schema.delete({});
+    await this.User.delete({});
 });
