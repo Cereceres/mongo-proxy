@@ -6,27 +6,34 @@ mongo proxy to wrap mongoDB
 
 
 # API 
-Expond a object with {
-    startServer([dbUrl, port, getters]),
-    getServer([dbUrl, getters]),
-    getMiddleware([dbUrl, getters])
-}
+Expond a object with :
+
+    {
+        startServer([dbUrl, port, getters]),
+        getServer([dbUrl, getters]),
+        getMiddleware([dbUrl, getters])
+    }
 
 
 dbUlrl default value is 'mongodb://localhost:27017/test'
-port default value is '8080'
+port default value is '8080'.
 
 
 ## Getters
 
 For getMiddleware:
+
     {
         getDatabase(dbUrl)-> DataBaseConnection,
         getUserModel(DataBaseConnection) -> userModel,
         getSchemaModel(DataBaseConnection) -> schemaModel,
         getCollection(DataBaseConnection) -> collectionModel
     }
+
+
 For getServer:
+
+
     {
         getDatabase(dbUrl)-> DataBaseConnection,
         getUserModel(DataBaseConnection) -> userModel,
@@ -35,6 +42,8 @@ For getServer:
         getMiddleware(dbUrl, getters) -> middleware(req, res)
     }
 For startServer:
+
+
     {
         getServer(dbUrl, getters) -> ServerInstance,
         getDatabase(dbUrl)-> DataBaseConnection,
@@ -72,16 +81,16 @@ For startServer:
 If you install globally you get a monprox command with next options:
 
     Options:
-  --version                  Show version number                       [boolean]
-  --gd, --get-db             Path to get-database                       [string]
-  --gum, --get-user-model    Path to get-user-model                     [string]
-  --gsm, --get-schema-model  Path to get-schema-model
-  --gc, --get-collection     Path to get-collection-model-thunk         [string]
-  --help                     Show help                                 [boolean]
-  -h, --host                 Host'url with basic auth to use
-                            [string] [default: "mongodb://localhost:27017/test"]
-  -s, --start                Start the server                          [boolean]
-  -p, --port                 Host'port                [string] [default: "8080"]
+    --version                  Show version number                       [boolean]
+    --gd, --get-db             Path to get-database                       [string]
+    --gum, --get-user-model    Path to get-user-model                     [string]
+    --gsm, --get-schema-model  Path to get-schema-model
+    --gc, --get-collection     Path to get-collection-model-thunk         [string]
+    --help                     Show help                                 [boolean]
+    -h, --host                 Host'url with basic auth to use
+                                [string] [default: "mongodb://localhost:27017/test"]
+    -s, --start                Start the server                          [boolean]
+    -p, --port                 Host'port                [string] [default: "8080"]
 
 
 Here the difference is that get-collection file must export a thunk what receive the 
