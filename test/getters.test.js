@@ -82,7 +82,7 @@ const getters = {
 };
 describe('test to getters', () => {
     before(() => {
-        agent = getAgent(startServer(undefined, null, getters));
+        agent = getAgent(startServer(undefined, 8081, getters));
     });
     it('description', async() => {
         const { body:{ records } } = await agent

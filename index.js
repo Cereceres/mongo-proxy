@@ -34,7 +34,8 @@ const _getServer = exports.getServer = (dbUrl, getters = {}) => {
     return http.createServer(serverCallback);
 };
 
-exports.startServer = (dbUrl, port = portDefault, getters = {}) => {
+exports.startServer = (dbUrl, _port, getters = {}) => {
+    const port = _port || portDefault;
     const { getServer = _getServer } = getters;
     const server = getServer(dbUrl, getters);
     server.listen(port, () => console.log('Mongo proxy is listening on : ', port));
