@@ -53,7 +53,8 @@ For getMiddleware:
         getDatabase(dbUrl)-> DataBaseConnection,
         getUserModel(DataBaseConnection) -> userModel,
         getSchemaModel(DataBaseConnection) -> schemaModel,
-        getCollection(DataBaseConnection) -> collectionModel
+        getCollection(DataBaseConnection) -> collectionModel,
+        getCredentialsFromReq(req) -> Promise.resolve({pass, name})
     }
 
 
@@ -64,7 +65,8 @@ For getServer:
         getDatabase(dbUrl)-> DataBaseConnection,
         getUserModel(DataBaseConnection) -> userModel,
         getSchemaModel(DataBaseConnection) -> schemaModel,
-        getCollection(DataBaseConnection) -> collectionModel
+        getCollection(DataBaseConnection) -> collectionModel,
+        getCredentialsFromReq(req) -> Promise.resolve({pass, name}),
         getMiddleware(dbUrl, getters) -> middleware(req, res)
     }
 For startServer:
@@ -75,7 +77,8 @@ For startServer:
         getDatabase(dbUrl)-> DataBaseConnection,
         getUserModel(DataBaseConnection) -> userModel,
         getSchemaModel(DataBaseConnection) -> schemaModel,
-        getCollection(DataBaseConnection) -> collectionModel
+        getCollection(DataBaseConnection) -> collectionModel,
+        getCredentialsFromReq(req) -> Promise.resolve({pass, name}),
         getMiddleware(dbUrl, getters) -> middleware(req, res)
     }
 

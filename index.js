@@ -17,7 +17,8 @@ const _getMiddleware = exports.getMiddleware = async(_dbUrl, getters = {}, optio
         getDatabase = _getDatabase,
         getUserModel = _getUserModel,
         getSchemaModel = _getSchemaModel,
-        getCollection:_getCollection
+        getCollection:_getCollection,
+        getCredentialsFromReq
     } = getters;
     const db = typeof dbUrl === 'object' ? dbUrl : await getDatabase(dbUrl);
     const ModelSchema = getSchemaModel(db);
@@ -25,7 +26,14 @@ const _getMiddleware = exports.getMiddleware = async(_dbUrl, getters = {}, optio
     const getUser = getGetterUser(ModelUser);
     const getSchema = getGetterSchema(ModelSchema);
     const getCollection = _getCollection || getGetterCollection(db);
-    return getCallback(getCollection, getSchema, getUser, options);
+    const paramsToGetCallback = {
+        getCollection,
+        getSchema,
+        getUser,
+        options,
+        getCredentialsFromReq
+    };
+    return getCallback(paramsToGetCallback);
 };
 
 const _getServer = exports.getServer = async(dbUrl, getters = {}, options) => {
