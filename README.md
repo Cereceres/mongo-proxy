@@ -9,15 +9,27 @@ mongo proxy to wrap mongoDB
 Expond a object with :
 
     {
-        startServer([dbUrl, port, getters]),
-        getServer([dbUrl, getters]),
-        getMiddleware([dbUrl, getters])
+        startServer([dbUrl, port, getters, options]),
+        getServer([dbUrl, getters, options]),
+        getMiddleware([dbUrl, getters, options])
     }
-
 
 dbUlrl default value is 'mongodb://localhost:27017/test'
 port default value is '8080'.
 
+Options object is:
+
+    {
+        baseUrl: '/path/where/mount/the/api'
+    }
+
+default value to baseUrl is '/'.
+
+With this options, then the request url is
+
+    localhost:8080/path/where/mount/the/api/collectionName/ID?query
+
+if ID is given the query is replaced with {_id:ID}, how you can guess, the collectionName is required. The data to POST and PUT must travel in body request field.
 
 ## Getters
 

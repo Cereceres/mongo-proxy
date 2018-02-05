@@ -11,7 +11,7 @@ const getGetterUser = require('./lib/get-getter-user');
 const dbHost = 'mongodb://localhost:27017/test';
 const portDefault = process.env.PORT || '8080';
 
-const _getMiddleware = exports.getMiddleware = (_dbUrl, getters = {}) => {
+const _getMiddleware = exports.getMiddleware = (_dbUrl, getters = {}, options) => {
     const dbUrl = _dbUrl || dbHost;
     const {
         getDatabase = _getDatabase,
@@ -25,19 +25,24 @@ const _getMiddleware = exports.getMiddleware = (_dbUrl, getters = {}) => {
     const getUser = getGetterUser(ModelUser);
     const getSchema = getGetterSchema(ModelSchema);
     const getCollection = _getCollection || getGetterCollection(db);
-    return getCallback(getCollection, getSchema, getUser);
+    return getCallback(getCollection, getSchema, getUser, options);
 };
 
-const _getServer = exports.getServer = (dbUrl, getters = {}) => {
+const _getServer = exports.getServer = (dbUrl, getters = {}, options) => {
     const { getMiddleware = _getMiddleware } = getters;
-    const serverCallback = getMiddleware(dbUrl, getters);
+    const serverCallback = getMiddleware(dbUrl, getters, options);
     return http.createServer(serverCallback);
 };
 
-exports.startServer = (dbUrl, _port, getters = {}) => {
-    const port = _port || portDefault;
+exports.startServer = (dbUrl, _port, getters = {}, options = {}) => {
+    let port = _port || portDefault;
+    if (typeof port === 'object') {
+        options = getters || options;
+        getters = port;
+        port = portDefault;
+    }
     const { getServer = _getServer } = getters;
-    const server = getServer(dbUrl, getters);
+    const server = getServer(dbUrl, getters, options);
     server.listen(port, () => console.log('Mongo proxy is listening on : ', port));
     return server;
 };

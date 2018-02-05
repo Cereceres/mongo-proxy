@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-
+let ID = null;
 describe('test to insert', () => {
     it('should return the object inserted', async function() {
         await this.User.create({
@@ -39,6 +39,7 @@ describe('test to insert', () => {
             .send({ test:'testing', user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200);
+        ID = records[0]._id;
         assert(records[0].test === 'testing');
         assert(records[0].user === '1');
         assert(records[0]._id);
@@ -55,6 +56,21 @@ describe('test to insert', () => {
                 assert(records[0].test === 'testing');
                 assert(records[0].user === '1');
                 assert(records[0]._id);
+                done();
+            });
+    });
+
+    it('should get the object inserted previously by ID', function(done) {
+        this.agent
+            .get(`/users/${ID}`)
+            .auth('test', new Buffer('test').toString('base64'))
+            .query({ user:'1' })
+            .expect('Content-Type', 'application/json')
+            .expect(200, (err, { body:{ records } }) => {
+                assert(!err);
+                assert(records[0].test === 'testing');
+                assert(records[0].user === '1');
+                assert(records[0]._id === ID);
                 done();
             });
     });
@@ -86,7 +102,7 @@ describe('test to insert', () => {
     });
 
     it('should  accept nested objects', async function() {
-        const res = await this.Schema.create({
+        await this.Schema.create({
             __schema: {
                 __$type:'object',
                 __$properties:{
