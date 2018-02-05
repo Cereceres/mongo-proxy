@@ -27,7 +27,7 @@ default value to baseUrl is '/'.
 
 With this options, then the request url is
 
-    localhost:8080/path/where/mount/the/api/collectionName/ID?query
+    localhost:8080/path/where/mount/the/api/collectionName[/ID?query]
 
 if ID is given the query is replaced with {_id:ID}, how you can guess, the collectionName is required. The data to POST and PUT must travel in body request field.
 

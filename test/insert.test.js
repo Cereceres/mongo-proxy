@@ -75,6 +75,20 @@ describe('test to insert', () => {
             });
     });
 
+    it('should get the object inserted previously by ID', function(done) {
+        this.agent
+            .get(`/users/${1111111}`)
+            .auth('test', new Buffer('test').toString('base64'))
+            .query({ user:'1' })
+            .expect('Content-Type', 'application/json')
+            .expect(400, (err, { body }) => {
+                const { error } = body;
+                assert(!err);
+                assert(error === 'Id must be a ObjectId valid.');
+                done();
+            });
+    });
+
 
     it('should update the object given', function(done) {
         this.agent

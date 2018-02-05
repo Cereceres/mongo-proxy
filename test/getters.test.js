@@ -72,6 +72,10 @@ const getters = {
                 assert(query);
                 return Promise.resolve([ {} ]);
             },
+            count: (query) => {
+                assert(query);
+                return Promise.resolve(10);
+            },
             update:(query, body) => {
                 assert(query);
                 assert(body);
