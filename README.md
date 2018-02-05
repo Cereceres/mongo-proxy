@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Cereceres/mongo-proxy.svg?branch=master)](https://travis-ci.org/Cereceres/mongo-proxy)
 
 
-# mongo-proxy
+# proxifying-mongo
 mongo proxy to wrap mongoDB
 
 
@@ -74,7 +74,80 @@ For startServer:
         update(query, dataToUpdate)-> Promise.resolve(docUpdated)
     }
 
+# Users Collection
 
+Default proxifying-mongo try to get info of user from __users collection.
+The proxifying-mongo looking for name and pass fields, the pass must be base64 coded.
+In this doc the [collectionName] field is a json with:
+
+    {
+        name:'userName',
+        pass:'base64codingPass',
+        someCollectionName:{
+            someField:{
+                __$remove:false,
+                __$get:false,
+                __$create:true,
+                __$update:false,
+            },
+            otherField:'__$all',
+            ...otherfields
+            _id:{
+                __$remove:false,
+                __$get:false,
+            }
+        },
+        otherCollectionName:{
+            fieldOne:'__$all',
+            fieldTwo:'__$all',
+            ...otherfields
+            _id:{
+                __$remove:false,
+                __$get:false,
+            }
+        },
+        actions: {
+            PUT:false,
+            GET: true,
+            DELETE: false,
+            POST:false
+        }
+    }
+
+actions could be '__$all' on that case all actions to this user are allowed.
+
+# Schema Model
+Default proxifying-mongo try to get the schema to collectionName given from __schemas collection, the schema must a json schema like [joison](!https://www.npmjs.com/package/joison) module, the json object returned by findOne method in schemaModel is passed to joison and the joi schema returned by joison is used to validate the data.
+
+    {
+        __schema: joisonSchema,
+        __collection:'collectionName'
+    }
+
+Example of doc in __schemas collection
+
+    {
+        __schema: {
+                __$type:'object',
+                __$properties:{
+                    someField:{
+                        __$type:'object',
+                        __$properties:{
+                            nested:{
+                                __$type:'string'
+                            }
+                        }
+                    },
+                    otherField:{
+                        __$type:'string'
+                    }
+                },
+                __$required:[]
+            },
+        __collection:'collectionName'
+    }
+
+actions could be '__$all' on that case all actions to this user are allowed.
 
 # Client
 

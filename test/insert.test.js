@@ -15,7 +15,8 @@ describe('test to insert', () => {
                 test:'__$all',
                 user:'__$all',
                 _id:'__$all'
-            }
+            },
+            actions:'__$all'
         });
         await this.Schema.create({
             __schema: {
