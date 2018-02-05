@@ -16,12 +16,12 @@ mongo proxy to wrap mongoDB
 Expond a object with :
 
     {
-        startServer([dbUrl, port, getters, options]),
-        getServer([dbUrl, getters, options]),
-        getMiddleware([dbUrl, getters, options])
+        startServer([dbUrl, port, getters, options]) -> Promise,
+        getServer([dbUrl, getters, options]) -> Promise,
+        getMiddleware([dbUrl, getters, options]) -> Promise
     }
 
-dbUlrl default value is 'mongodb://localhost:27017/test'
+Because of async behavior of DB connections every function return a promise. In another hand dbUlrl default value is 'mongodb://localhost:27017/test'
 port default value is '8080'.
 
 Options object is:
@@ -97,7 +97,8 @@ For startServer:
         find(query)-> Promise.resolve(resultQuery),
         create(data)-> Promise.resolve(dataCreated),
         delete(query)-> Promise.resolve(docRemoved),
-        update(query, dataToUpdate)-> Promise.resolve(docUpdated)
+        update(query, dataToUpdate)-> Promise.resolve(docUpdated),
+        count(query) -> Promise.resolve(NumberOfDocMatchingQuery)
     }
 
 # Users Collection
