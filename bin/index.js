@@ -8,6 +8,7 @@ const {
     host,
     start,
     port,
+    burl,
     gd: getDataBasePath,
     gum: getUserModelPath,
     gsm: getSchemaModelPath,
@@ -30,5 +31,6 @@ if (thereAreGetCollection) getters.getCollection = thereAreGetCollection.getColl
 if (start) startServer(
     thereAreGetCollection ? thereAreGetCollection.db : host,
     port,
-    getters
+    getters,
+    { baseUrl: burl }
 );

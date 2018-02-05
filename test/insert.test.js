@@ -4,8 +4,8 @@ let ID = null;
 describe('test to insert', () => {
     it('should return the object inserted', async function() {
         await this.User.create({
-            name:'test',
-            pass:'test',
+            name: 'test',
+            pass: new Buffer('test').toString('base64'),
             users:{
                 test:'__$all',
                 user:'__$all',
@@ -35,7 +35,7 @@ describe('test to insert', () => {
         });
         const { body:{ records } } = await this.agent
             .post('/users')
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .send({ test:'testing', user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200);
@@ -48,7 +48,7 @@ describe('test to insert', () => {
     it('should get the object inserted previously', function(done) {
         this.agent
             .get('/users')
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .query({ user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records } }) => {
@@ -63,7 +63,7 @@ describe('test to insert', () => {
     it('should get the object inserted previously by ID', function(done) {
         this.agent
             .get(`/users/${ID}`)
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .query({ user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records } }) => {
@@ -78,7 +78,7 @@ describe('test to insert', () => {
     it('should get the object inserted previously by ID', function(done) {
         this.agent
             .get(`/users/${1111111}`)
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .query({ user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(400, (err, { body }) => {
@@ -94,7 +94,7 @@ describe('test to insert', () => {
         this.agent
             .put('/users')
             .query({ user:'1' })
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .send({ test:'testing updated' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ done:_done } }) => {
@@ -106,7 +106,7 @@ describe('test to insert', () => {
     it('should remove the elements', function(done) {
         this.agent
             .delete('/users')
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .query({ user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body }) => {
@@ -138,7 +138,7 @@ describe('test to insert', () => {
         });
         const { body:{ records } } = await this.agent
             .post('/others')
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .send({ test:{ nested:'nested' }, user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200);
@@ -150,7 +150,7 @@ describe('test to insert', () => {
     it('should get the object inserted previously with nested query', function(done) {
         this.agent
             .get('/others')
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .query({ 'test.nested':'nested' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records } }) => {
@@ -165,7 +165,7 @@ describe('test to insert', () => {
     it('should remove the elements', function(done) {
         this.agent
             .delete('/others')
-            .auth('test', new Buffer('test').toString('base64'))
+            .auth('test', 'test')
             .query({ 'test.nested':'nested' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ done:_done } }) => {

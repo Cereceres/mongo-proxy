@@ -17,7 +17,7 @@ const getters = {
                 assert(query);
                 return Promise.resolve({
                     name:'test2',
-                    pass:'test',
+                    pass:new Buffer('test').toString('base64'),
                     users:{
                         test:'__$all',
                         user:'__$all',
@@ -94,7 +94,7 @@ describe('test to getters', () => {
     it('should create the doc sent', async() => {
         const { body:{ records } } = await agent
             .post('/api/rest/path/users')
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .send({ test:'testing', user:'2' })
             .expect('Content-Type', 'application/json')
             .expect(200);
@@ -106,7 +106,7 @@ describe('test to getters', () => {
     it('should get the object inserted previously', (done) => {
         agent
             .get('/api/rest/path/users')
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .query({ user:'2' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records } }) => {
@@ -121,7 +121,7 @@ describe('test to getters', () => {
         agent
             .put('/api/rest/path/users')
             .query({ user:'2' })
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .send({ test:'testing updated' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records, done:_done } }) => {
@@ -134,7 +134,7 @@ describe('test to getters', () => {
     it('should remove the elements', (done) => {
         agent
             .delete('/api/rest/path/users')
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .query({ user:'2' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ done:_done } }) => {

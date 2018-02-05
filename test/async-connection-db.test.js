@@ -16,7 +16,7 @@ const getters = {
                 assert(query);
                 return Promise.resolve({
                     name:'test2',
-                    pass:'test',
+                    pass:new Buffer('test').toString('base64'),
                     users:{
                         test:'__$all',
                         user:'__$all',
@@ -92,7 +92,7 @@ describe('test to getters', () => {
     it('should create the doc sent', async() => {
         const { body:{ records } } = await agent
             .post('/users')
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .send({ test:'testing', user:'2' })
             .expect('Content-Type', 'application/json')
             .expect(200);
@@ -103,10 +103,12 @@ describe('test to getters', () => {
     it('should get the object inserted previously', (done) => {
         agent
             .get('/users')
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .query({ user:'2' })
             .expect('Content-Type', 'application/json')
-            .expect(200, (err, { body:{ records } }) => {
+            .expect(200, (err, { body:{ records, next } }) => {
+                console.log('next ', next);
+                assert(!next);
                 assert(!err);
                 assert(records[0].test === 'testing');
                 assert(records[0].user === '2');
@@ -118,11 +120,10 @@ describe('test to getters', () => {
         agent
             .put('/users')
             .query({ user:'2' })
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .send({ test:'testing updated' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records, done:_done } }) => {
-                console.log('records ', records);
                 assert(records[0].test === 'testing updated');
                 assert(!err);
                 assert(_done);
@@ -132,7 +133,7 @@ describe('test to getters', () => {
     it('should remove the elements', (done) => {
         agent
             .delete('/users')
-            .auth('test2', new Buffer('test').toString('base64'))
+            .auth('test2', 'test')
             .query({ user:'2' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ done:_done } }) => {
