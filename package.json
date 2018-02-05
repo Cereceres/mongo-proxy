@@ -1,6 +1,6 @@
 {
   "name": "proxifying-mongo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "server to be used as proxy to mongodb",
   "main": "index.js",
   "directories": {
