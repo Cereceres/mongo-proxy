@@ -107,7 +107,6 @@ describe('test to getters', () => {
             .query({ user:'2' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records, next } }) => {
-                console.log('next ', next);
                 assert(!next);
                 assert(!err);
                 assert(records[0].test === 'testing');
