@@ -82,7 +82,7 @@ const getters = {
 };
 describe('test to getters', () => {
     before(() => {
-        agent = getAgent(startServer(null, null, getters));
+        agent = getAgent(startServer(undefined, null, getters));
     });
     it('description', async() => {
         const { body:{ records } } = await agent
@@ -103,7 +103,6 @@ describe('test to getters', () => {
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records } }) => {
                 assert(!err);
-                console.log('records ', records);
                 assert(records[0].test === 'testing');
                 assert(records[0].user === '2');
                 done();

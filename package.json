@@ -19,6 +19,9 @@
     "proxy",
     "server"
   ],
+  "bin": {
+    "monprox": "./bin/index.js"
+  },
   "author": "Jesus Cereceres",
   "license": "MIT",
   "bugs": {
@@ -27,9 +30,10 @@
   "homepage": "https://github.com/Cereceres/mongo-proxy#readme",
   "dependencies": {
     "basic-auth": "^2.0.0",
+    "joi": "^13.1.2",
     "joison": "0.0.3",
     "mongoose": "^5.0.3",
-    "joi": "^13.1.2"
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "supertest": "^3.0.0"
