@@ -88,12 +88,11 @@ const getters = {
     }
 };
 describe('test to getters', () => {
-    before(() => {
-        agent = getAgent(startServer(undefined, 8083, getters, {
-            baseUrl:'/api/rest/path'
-        }));
+    before(async() => {
+        const server = await startServer(undefined, 8083, getters, { baseUrl:'/api/rest/path' });
+        agent = getAgent(server);
     });
-    it('description', async() => {
+    it('should create the doc sent', async() => {
         const { body:{ records } } = await agent
             .post('/api/rest/path/users')
             .auth('test2', new Buffer('test').toString('base64'))

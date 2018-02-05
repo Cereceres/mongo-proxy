@@ -85,10 +85,11 @@ const getters = {
     }
 };
 describe('test to getters', () => {
-    before(() => {
-        agent = getAgent(startServer(undefined, 8081, getters));
+    before(async() => {
+        const server = await startServer(undefined, 8082, getters);
+        agent = getAgent(server);
     });
-    it('description', async() => {
+    it('should create the doc sent', async() => {
         const { body:{ records } } = await agent
             .post('/users')
             .auth('test2', new Buffer('test').toString('base64'))
@@ -121,6 +122,7 @@ describe('test to getters', () => {
             .send({ test:'testing updated' })
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body:{ records, done:_done } }) => {
+                console.log('records ', records);
                 assert(records[0].test === 'testing updated');
                 assert(!err);
                 assert(_done);

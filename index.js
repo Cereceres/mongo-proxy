@@ -11,7 +11,7 @@ const getGetterUser = require('./lib/get-getter-user');
 const dbHost = 'mongodb://localhost:27017/test';
 const portDefault = process.env.PORT || '8080';
 
-const _getMiddleware = exports.getMiddleware = (_dbUrl, getters = {}, options) => {
+const _getMiddleware = exports.getMiddleware = async(_dbUrl, getters = {}, options) => {
     const dbUrl = _dbUrl || dbHost;
     const {
         getDatabase = _getDatabase,
@@ -19,7 +19,7 @@ const _getMiddleware = exports.getMiddleware = (_dbUrl, getters = {}, options) =
         getSchemaModel = _getSchemaModel,
         getCollection:_getCollection
     } = getters;
-    const db = typeof dbUrl === 'object' ? dbUrl : getDatabase(dbUrl);
+    const db = typeof dbUrl === 'object' ? dbUrl : await getDatabase(dbUrl);
     const ModelSchema = getSchemaModel(db);
     const ModelUser = getUserModel(db);
     const getUser = getGetterUser(ModelUser);
@@ -28,13 +28,13 @@ const _getMiddleware = exports.getMiddleware = (_dbUrl, getters = {}, options) =
     return getCallback(getCollection, getSchema, getUser, options);
 };
 
-const _getServer = exports.getServer = (dbUrl, getters = {}, options) => {
+const _getServer = exports.getServer = async(dbUrl, getters = {}, options) => {
     const { getMiddleware = _getMiddleware } = getters;
-    const serverCallback = getMiddleware(dbUrl, getters, options);
+    const serverCallback = await getMiddleware(dbUrl, getters, options);
     return http.createServer(serverCallback);
 };
 
-exports.startServer = (dbUrl, _port, getters = {}, options = {}) => {
+exports.startServer = async(dbUrl, _port, getters = {}, options = {}) => {
     let port = _port || portDefault;
     if (typeof port === 'object') {
         options = getters || options;
@@ -42,7 +42,7 @@ exports.startServer = (dbUrl, _port, getters = {}, options = {}) => {
         port = portDefault;
     }
     const { getServer = _getServer } = getters;
-    const server = getServer(dbUrl, getters, options);
+    const server = await getServer(dbUrl, getters, options);
     server.listen(port, () => console.log('Mongo proxy is listening on : ', port));
     return server;
 };
