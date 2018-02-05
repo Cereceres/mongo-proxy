@@ -8,6 +8,7 @@ module.exports = () => require('yargs')
     .alias('gd', 'get-db')
     .alias('gum', 'get-user-model')
     .alias('gsm', 'get-schema-model')
+    .alias('gcfr', 'get-credentials-from-req')
     .alias('gc', 'get-collection')
     .alias('burl', 'base-url')
     .describe('host', 'Host\'url with basic auth to use')
@@ -15,6 +16,7 @@ module.exports = () => require('yargs')
     .describe('gum', 'Path to get-user-model')
     .describe('gsm', 'Path to get-schema-model')
     .describe('gc', 'Path to get-collection-model-thunk')
+    .describe('gcfr', 'Path to get-credentials-from-req')
     .describe('burl', 'Base url where mount the server')
     .describe('port', 'Host\'port')
     .describe('start', 'Start the server')
@@ -26,6 +28,10 @@ module.exports = () => require('yargs')
     .coerce('gd', (gd) => {
         if (gd === true) gd = './';
         return path.resolve(process.cwd(), gd);
+    })
+    .coerce('gcfr', (gcfr) => {
+        if (gcfr === true) gcfr = './';
+        return path.resolve(process.cwd(), gcfr);
     })
     .coerce('gum', (gum) => {
         if (gum === true) gum = './';

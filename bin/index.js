@@ -12,7 +12,8 @@ const {
     gd: getDataBasePath,
     gum: getUserModelPath,
     gsm: getSchemaModelPath,
-    gc: getCollectionPath
+    gc: getCollectionPath,
+    gcfr: getCredentialsFromReqPath
 } = getOptions();
 
 const getters = {};
@@ -20,6 +21,7 @@ const getters = {};
 if (getDataBasePath) getters.getDatabase = require(getDataBasePath);
 if (getUserModelPath) getters.getUserModel = require(getUserModelPath);
 if (getSchemaModelPath) getters.getSchemaModel = require(getSchemaModelPath);
+if (getCredentialsFromReqPath) getters.getCredentialsFromReq = require(getCredentialsFromReqPath);
 
 const thereAreGetCollection = parseGetCollection(
     getCollectionPath,
