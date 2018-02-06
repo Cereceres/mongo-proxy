@@ -39,11 +39,11 @@ With this options, then the request url is
 if ID is given the query is replaced with {_id:ID}, how you can guess, the collectionName is required. The data to POST and PUT must travel in body request field.
 
 # Response
-{
-    error, // if is present other fields will be missing
-    records, // array of items altered
-    next // path to next request to do pagination
-}
+    {
+        error, // if is present other fields will be missing
+        records, // array of items altered
+        next // path to next request to do pagination
+    }
 
 ## Getters
 
