@@ -9,7 +9,7 @@ mongo proxy to wrap mongoDB
 |Variable|Mean|Default|
 |---|---|---|
 |NUM_DOC_BY_PAGE|doc's number to return in a query|100|
-|Port|port where start the server|8080|
+|PORT|port where start the server|8080|
 
 
 # API 
