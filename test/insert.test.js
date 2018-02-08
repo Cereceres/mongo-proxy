@@ -42,7 +42,6 @@ describe('test to insert', () => {
         ID = records[0]._id;
         assert(records[0].test === 'testing');
         assert(records[0].user === '1');
-        assert(records[0]._id);
     });
 
     it('should get the object inserted previously', function(done) {
@@ -56,11 +55,13 @@ describe('test to insert', () => {
                 assert(records[0].test === 'testing');
                 assert(records[0].user === '1');
                 assert(records[0]._id);
+                ID = records[0]._id;
                 done();
             });
     });
 
     it('should get the object inserted previously by ID', function(done) {
+        console.log('ID ', ID);
         this.agent
             .get(`/users/${ID}`)
             .auth('test', 'test')
@@ -144,7 +145,6 @@ describe('test to insert', () => {
             .expect(200);
         assert(records[0].test.nested === 'nested');
         assert(records[0].user === '1');
-        assert(records[0]._id);
     });
 
     it('should get the object inserted previously with nested query', function(done) {
