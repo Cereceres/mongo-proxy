@@ -16,6 +16,7 @@ mongo proxy to wrap mongoDB
 Expond a object with :
 
     {
+        ProxyError -> Object,
         startServer([dbUrl, port, getters, options]) -> Promise,
         getServer([dbUrl, getters, options]) -> Promise,
         getMiddleware([dbUrl, getters, options]) -> Promise
@@ -45,6 +46,17 @@ if ID is given the query is replaced with {_id:ID}, how you can guess, the colle
         next // path to next request to do pagination
     }
 
+# Errors
+
+Promise rejected will be considered as API errors. The object returned by a promise rejected need to be:
+
+    {
+        message: string() // error property returned in response,
+        code: number() // http code to return in response, default 500
+    }
+
+## Class ProxyError(httpCode, message)
+Extends of Error class.
 ## Getters
 
 For getMiddleware:

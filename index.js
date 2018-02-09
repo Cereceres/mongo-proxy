@@ -1,5 +1,6 @@
 const http = require('http');
 
+const ProxyError = require('./lib/ProxyError');
 const getGetterCollection = require('./lib/get-getter-collection');
 const getCallback = require('./lib/get-callback');
 const getGetterSchema = require('./lib/get-getter-schema');
@@ -54,5 +55,7 @@ exports.startServer = async(dbUrl, _port, getters = {}, options = {}) => {
     server.listen(port, () => console.log('Mongo proxy is listening on : ', port));
     return server;
 };
+
+exports.ProxyError = ProxyError;
 
 
