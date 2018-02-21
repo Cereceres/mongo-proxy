@@ -39,6 +39,7 @@ describe('test to insert', () => {
             .send({ test:'testing', user:'1' })
             .expect('Content-Type', 'application/json')
             .expect(200);
+        console.log('records ', records);
         ID = records[0]._id;
         assert(records[0].test === 'testing');
         assert(records[0].user === '1');
@@ -61,7 +62,6 @@ describe('test to insert', () => {
     });
 
     it('should get the object inserted previously by ID', function(done) {
-        console.log('ID ', ID);
         this.agent
             .get(`/users/${ID}`)
             .auth('test', 'test')
