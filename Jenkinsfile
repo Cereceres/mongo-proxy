@@ -11,7 +11,7 @@ node('testing') {
     }
 
     stage('Build') {
-        echo 'Building dependencies...'
+        echo 'Building dependencies.....'
         sh 'npm i'
     }
 
