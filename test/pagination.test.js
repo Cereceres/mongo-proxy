@@ -87,7 +87,7 @@ const getters = {
         };
     }
 };
-describe('test to getters', () => {
+describe('test to pagination', () => {
     before(async() => {
         const server = await startServer(undefined, 8083, getters, { baseUrl:'/api/rest/path' });
         agent = getAgent(server);

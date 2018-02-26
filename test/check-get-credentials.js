@@ -95,9 +95,9 @@ const getters = {
         });
     }
 };
-describe('test to getters', () => {
+describe('test to get credentials', () => {
     before(async() => {
-        const server = await startServer(undefined, 8000, getters, { baseUrl:'/api/rest/path' });
+        const server = await startServer(undefined, 8080, getters, { baseUrl:'/api/rest/path' });
         agent = getAgent(server);
     });
     it('should create the doc sent', async() => {

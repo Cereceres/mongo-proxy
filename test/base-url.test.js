@@ -86,7 +86,7 @@ const getters = {
         };
     }
 };
-describe('test to getters', () => {
+describe('test to baseurl', () => {
     before(async() => {
         const server = await startServer(undefined, 8081, getters, { baseUrl:'/api/rest/path' });
         agent = getAgent(server);

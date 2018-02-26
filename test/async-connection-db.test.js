@@ -84,7 +84,7 @@ const getters = {
         };
     }
 };
-describe('test to getters', () => {
+describe('test to async connections', () => {
     before(async() => {
         const server = await startServer(undefined, 8090, getters);
         agent = getAgent(server);
