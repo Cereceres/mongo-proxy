@@ -4,17 +4,12 @@
 # proxifying-mongo
 mongo proxy to wrap mongoDB
    
-
-
 # Config
 
 |Variable|Mean|Default|
 |---|---|---|
 |NUM_DOC_BY_PAGE|doc's number to return in a query|100|
 |PORT|port where start the server|8080|
-
-
-
 
 # API 
 Expond a object with :
