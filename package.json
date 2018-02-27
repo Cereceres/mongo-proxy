@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "jsonwebtoken": "^8.1.1",
+    "nock": "^9.2.3",
     "supertest": "^3.0.0"
   }
 }

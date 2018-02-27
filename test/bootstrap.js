@@ -10,7 +10,7 @@ const User = getUserModel(db);
 const { startServer } = require('../index');
 
 before(async function() {
-    const server = await startServer(undefined, 9000);
+    const server = await startServer(undefined, 9090);
     this.agent = agent(server);
     this.Schema = Schema;
     this.User = User;
