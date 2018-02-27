@@ -44,7 +44,7 @@ const _getServer = exports.getServer = async(dbUrl, getters = {}, options) => {
     return http.createServer(serverCallback);
 };
 
-exports.startServer = async(dbUrl, _port, getters = {}, options = {}) => {
+const startServer = exports.startServer = async(dbUrl, _port, getters = {}, options = {}) => {
     let port = _port || portDefault;
     if (typeof port === 'object') {
         options = getters || options;
@@ -56,7 +56,8 @@ exports.startServer = async(dbUrl, _port, getters = {}, options = {}) => {
     server.listen(port, listenOpen(port));
     return server;
 };
-
 exports.ProxyError = ProxyError;
+
+if (!module.parent) startServer();
 
 
