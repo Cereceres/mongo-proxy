@@ -6,6 +6,8 @@ mongo proxy to wrap mongoDB
    
 # Config
 
+
+
 |Variable|Mean|Default|
 |---|---|---|
 |NUM_DOC_BY_PAGE|doc's number to return in a query|100|
