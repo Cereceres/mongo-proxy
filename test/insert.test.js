@@ -112,6 +112,7 @@ describe('test to insert', () => {
             .expect('Content-Type', 'application/json')
             .expect(200, (err, { body }) => {
                 assert(!err);
+                assert(body);
                 done();
             });
     });
