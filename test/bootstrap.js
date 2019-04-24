@@ -9,14 +9,14 @@ const User = getUserModel(db);
 
 const { startServer } = require('../index');
 
-before(async function() {
-    const server = await startServer(undefined, 9000);
-    this.agent = agent(server);
-    this.Schema = Schema;
-    this.User = User;
+before(async function () {
+  const server = await startServer(undefined, 9000);
+  this.agent = agent(server);
+  this.Schema = Schema;
+  this.User = User;
 });
 
-after(async function() {
-    await this.Schema.delete({});
-    await this.User.delete({});
+after(async function () {
+  await this.Schema.delete({});
+  await this.User.delete({});
 });
